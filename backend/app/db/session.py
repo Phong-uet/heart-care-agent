@@ -1,12 +1,9 @@
-import os
-from dotenv import load_dotenv
+from app.core.config import settings
 from sqlalchemy import create_engine
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import sessionmaker
 
-load_dotenv()
-
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = settings.DATABASE_URL
 if DATABASE_URL and make_url(DATABASE_URL).drivername == "postgresql":
     DATABASE_URL = make_url(DATABASE_URL).set(
         drivername="postgresql+psycopg2"
